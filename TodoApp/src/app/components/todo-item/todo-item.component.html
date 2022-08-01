@@ -1,1 +1,32 @@
-<p>todo-item works!</p>
+<div class="hover:shadow flex p-4 justify-between items-center bg-gray-50 my-2">
+  <div class="flex justify-center space-x-4 bg-gray-50">
+    <div class="bg-gray-50 m-2 round" *ngIf="!editTodo">
+      <input type="checkbox" checked id="checkbox" />
+      <label for="checkbox"></label>
+    </div>
+    <div class="ml-2 p-2 bg-gray-50" *ngIf="!editTodo; else inputBlock">
+      {{ todo!.title }}
+    </div>
+    <ng-template #inputBlock>
+      <input
+        class="input ml-2 p-2"
+        [(ngModel)]="todoInput"
+        type="text"
+        placeholder="Update title"
+      />
+    </ng-template>
+  </div>
+  <div class="flex bg-gray-50">
+    <button
+      *ngIf="!editTodo; else elseBlock"
+      class="btn blue mr-2"
+      (click)="updateToggle()"
+    >
+      Edit
+    </button>
+    <ng-template #elseBlock>
+      <button class="btn blue mr-2" (click)="updateTodo()">Update</button>
+    </ng-template>
+    <button class="btn red" (click)="deleteTodo()">Delete</button>
+  </div>
+</div>

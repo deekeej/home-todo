@@ -1,1 +1,8 @@
-<p>todo-list works!</p>
+<div class="m-2 bg-gray-50">
+  <div
+    *ngFor="let todo of todos"
+    class="m-2 bg-gray-50 border-cyan-600 border-4"
+  >
+    <app-todo-item [todo]="todo"></app-todo-item>
+  </div>
+</div>
