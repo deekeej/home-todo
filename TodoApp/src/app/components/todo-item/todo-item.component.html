@@ -1,8 +1,11 @@
 <div class="hover:shadow flex p-4 justify-between items-center bg-gray-50 my-2">
   <div class="flex justify-center space-x-4 bg-gray-50">
-    <div class="bg-gray-50 m-2 round" *ngIf="!editTodo">
-      <input type="checkbox" checked id="checkbox" />
-      <label for="checkbox"></label>
+    <div class="bg-gray-50 m-2 block" *ngIf="!editTodo">
+      <input
+        type="checkbox"
+        class="w-6 h-6 rounded-full"
+        (click)="completeToggle()"
+      />
     </div>
     <div class="ml-2 p-2 bg-gray-50" *ngIf="!editTodo; else inputBlock">
       {{ todo!.title }}
