@@ -11,7 +11,7 @@ import { actions } from '../todos-store/actions';
 export class TodoItemComponent implements OnInit {
   @Input() todo?: TodoModel;
   editTodo: boolean = false;
-  completeTodo: boolean = false;
+  @Input() completeTodo: boolean = false;
   todoInput?: string;
 
   constructor(private store: Store) {}
@@ -35,9 +35,8 @@ export class TodoItemComponent implements OnInit {
       })
     );
   }
-  completeToggle(e: any) {
-    this.completeTodo = !this.completeTodo;
-    if (e) {
+  completeToggle() {
+    if (this.completeTodo) {
       this.store.dispatch(
         actions.updateTodoAction({
           id: this.todo!.id,
@@ -45,8 +44,8 @@ export class TodoItemComponent implements OnInit {
           title: this.todo!.title,
         })
       );
+      console.log('hi');
     }
-    console.log('hi');
   }
   deleteTodo() {
     this.store.dispatch(
