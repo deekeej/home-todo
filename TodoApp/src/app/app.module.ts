@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { TodoInputComponent } from './components/todo-input/todo-input.component';
 import { TodoItemComponent } from './components/todo-item/todo-item.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
-import { todoReducer } from './components/todos-store/reducers';
+import { todoReducer } from './todos-store/reducers';
 import { StoreModule } from '@ngrx/store';
 import { TodosComponent } from './components/todos/todos.component';
 

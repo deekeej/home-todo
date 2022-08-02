@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TodoModel } from '../todos-store/state';
+import { TodoModel } from '../../todos-store/state';
 import { Store } from '@ngrx/store';
-import { actions } from '../todos-store/actions';
+import { actions } from '../../todos-store/actions';
 
 @Component({
   selector: 'app-todo-item',

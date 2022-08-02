@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { TodoModel } from '../todos-store/state';
-import { todosSelector } from '../todos-store/selectors';
-import { actions } from '../todos-store/actions';
+import { TodoModel } from '../../todos-store/state';
+import { todosSelector } from '../../todos-store/selectors';
+import { actions } from '../../todos-store/actions';
 @Component({
   selector: 'app-todo-input',
   templateUrl: './todo-input.component.html',
