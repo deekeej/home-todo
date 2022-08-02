@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { TodoModel } from '../todos-store/state';
 import { Store } from '@ngrx/store';
 import { todosSelector } from '../todos-store/selectors';
+import { TodoModel } from '../todos-store/state';
 
 @Component({
-  selector: 'app-todo-list',
-  templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.scss'],
+  selector: 'app-todos',
+  templateUrl: './todos.component.html',
+  styleUrls: ['./todos.component.scss'],
 })
-export class TodoListComponent implements OnInit {
-  todos: TodoModel[] = [];
-
+export class TodosComponent implements OnInit {
+  todos!: TodoModel[];
   constructor(private store: Store) {}
 
   ngOnInit(): void {

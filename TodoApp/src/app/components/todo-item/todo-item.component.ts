@@ -44,7 +44,6 @@ export class TodoItemComponent implements OnInit {
           title: this.todo!.title,
         })
       );
-      console.log('hi');
     }
   }
   deleteTodo() {

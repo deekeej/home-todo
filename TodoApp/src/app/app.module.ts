@@ -8,6 +8,7 @@ import { TodoItemComponent } from './components/todo-item/todo-item.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { todoReducer } from './components/todos-store/reducers';
 import { StoreModule } from '@ngrx/store';
+import { TodosComponent } from './components/todos/todos.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { StoreModule } from '@ngrx/store';
     TodoInputComponent,
     TodoItemComponent,
     TodoListComponent,
+    TodosComponent,
   ],
   imports: [
     BrowserModule,

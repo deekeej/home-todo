@@ -3,7 +3,7 @@
     <div class="bg-gray-50 m-2 block" *ngIf="!editTodo">
       <input
         type="checkbox"
-        class="w-6 h-6 rounded-full"
+        class="w-6 h-6"
         [(ngModel)]="completeTodo"
         (change)="completeToggle()"
       />
