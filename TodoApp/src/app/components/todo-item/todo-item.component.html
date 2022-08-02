@@ -4,7 +4,8 @@
       <input
         type="checkbox"
         class="w-6 h-6 rounded-full"
-        (click)="completeToggle()"
+        name="$event"
+        (change)="completeToggle($event)"
       />
     </div>
     <div class="ml-2 p-2 bg-gray-50" *ngIf="!editTodo; else inputBlock">
