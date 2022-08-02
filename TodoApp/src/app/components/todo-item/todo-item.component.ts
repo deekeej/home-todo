@@ -36,6 +36,7 @@ export class TodoItemComponent implements OnInit {
     );
   }
   completeToggle(e: any) {
+    this.completeTodo = !this.completeTodo;
     if (e) {
       this.store.dispatch(
         actions.updateTodoAction({
@@ -45,7 +46,6 @@ export class TodoItemComponent implements OnInit {
         })
       );
     }
-    this.completeTodo = !this.completeTodo;
     console.log('hi');
   }
   deleteTodo() {
