@@ -10,9 +10,20 @@
     <div class="p-2 bg-white m-8 rounded w-2/3">
       <app-todo-input></app-todo-input>
       <hr class="bg-white first-letter:border-8 m-2" />
+      <div class="flex justify-between">
+        <button (click)="completeAll()">Complete all tasks</button>
+        <button (click)="clearCompleted()">Clear completed</button>
+      </div>
       <app-todo-list></app-todo-list>
       <hr class="bg-white first-letter:border-8 m-2" />
-      <span>{{ todos.length }} tasks left</span>
+      <div class="flex justify-between">
+        <span>{{ todos.length }} tasks left</span>
+        <div class="flex">
+          <button class="mr-3" (click)="getAll()">All</button>
+          <button class="mr-3" (click)="getUncompleted()">Uncompleted</button>
+          <button (click)="getCompleted()">Completed</button>
+        </div>
+      </div>
     </div>
   </div>
 </body>
