@@ -2,16 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-// .inputIcon {
-//     background-image: url('../../../assets/imgs/writing.png'); 
-//     padding:0px 40px;
-//     background-size:40px;
-//     background-repeat:no-repeat;
-//     border-radius:8px;
-// }
-
-
 .btn{
     @apply cursor-pointer px-8 py-2  rounded text-white font-semibold;
 }
