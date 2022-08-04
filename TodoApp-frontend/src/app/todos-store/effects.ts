@@ -5,13 +5,13 @@ import { BackendService } from '../services/backend.service';
 import { actions } from './actions';
 
 @Injectable()
-export class QuestionsEffects {
+export class TodosEffects {
   getTodos$ = createEffect(() =>
     this.actions$.pipe(
       ofType(actions.getTodosAction),
       mergeMap(() => {
         return this.TodosService.getAllTodos().pipe(
-          map((todos) => actions.getTodosAction({ todos }))
+          map((todos) => actions.getTodosSuccessAction({ todos }))
         );
       })
     )

@@ -4,10 +4,9 @@ import { TodoModel } from "../types/todoModel";
 
 export const getTodos = async (req: Request, res: Response) => {
   try {
-    let results: TodoModel[] = [];
     con.query("SELECT id,title,completed FROM todos", (err, rows) => {
       if (err) throw err;
-      let todos = JSON.parse(JSON.stringify(rows));
+      let todos: TodoModel[] = JSON.parse(JSON.stringify(rows));
       console.log(rows);
       res.status(200).send(todos);
     });

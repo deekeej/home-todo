@@ -1,8 +1,9 @@
 import { TodoModel } from './state';
 import { createAction, props } from '@ngrx/store';
 
-const getTodosAction = createAction(
-  '[TODO] GET_TODOS',
+const getTodosAction = createAction('[TODO] GET_TODOS');
+const getTodosSuccessAction = createAction(
+  '[TODO] GET_TODOS_SUCCESS',
   props<{ todos: TodoModel[] }>()
 );
 const addTodoAction = createAction('[TODO] ADD_TODO', props<TodoModel>());
@@ -22,4 +23,5 @@ export const actions = {
   getCompletedTodoAction,
   completeAllTodoAction,
   clearAllCompletedTodoAction,
+  getTodosSuccessAction,
 };

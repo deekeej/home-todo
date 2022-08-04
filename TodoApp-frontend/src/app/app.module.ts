@@ -9,7 +9,9 @@ import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { todoReducer } from './todos-store/reducers';
 import { StoreModule } from '@ngrx/store';
 import { TodosComponent } from './components/todos/todos.component';
-
+import { TodosEffects } from './todos-store/effects';
+import { HttpClientModule } from '@angular/common/http';
+import { EffectsModule } from '@ngrx/effects';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,8 +23,11 @@ import { TodosComponent } from './components/todos/todos.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule,
     StoreModule.forRoot({ todos: todoReducer }),
+    EffectsModule.forRoot([TodosEffects]),
+    EffectsModule.forFeature([TodosEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],

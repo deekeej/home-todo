@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { todosSelector } from '../../todos-store/selectors';
 import { TodoModel } from '../../todos-store/state';
 import { actions } from 'src/app/todos-store/actions';
@@ -13,9 +13,12 @@ import { Observable } from 'rxjs';
 export class TodosComponent implements OnInit {
   todos!: TodoModel[];
   todos$!: Observable<TodoModel[]>;
-  constructor(private store: Store) {}
+  constructor(private store: Store) {
+    this.todos$ = this.store.pipe(select(todosSelector));
+  }
 
   ngOnInit(): void {
+    this.store.dispatch(actions.getTodosAction());
     this.store.select(todosSelector).subscribe((state) => (this.todos = state));
   }
 
@@ -28,7 +31,7 @@ export class TodosComponent implements OnInit {
   }
 
   getAll() {
-    console.log('hi');
+    this.store.dispatch(actions.getTodosAction());
   }
   getCompleted() {
     this.store.dispatch(actions.getCompletedTodoAction());
