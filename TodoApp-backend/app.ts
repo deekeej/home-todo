@@ -2,6 +2,8 @@ import express, { Express } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
+import { router as userRouter } from "./routers/user";
+import { router as todoRouter } from "./routers/todo";
 
 //dotenv set up
 dotenv.config();
@@ -14,6 +16,13 @@ app.use(cors());
 
 // public folder
 app.use(express.static(path.join(__dirname, "public")));
+
+//database connection
+// select all authors
+
+// routes
+app.use("/user", userRouter);
+app.use("/api", todoRouter);
 
 // server setup
 const PORT: number =

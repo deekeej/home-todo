@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { todosSelector } from '../../todos-store/selectors';
 import { TodoModel } from '../../todos-store/state';
 import { actions } from 'src/app/todos-store/actions';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-todos',
@@ -11,6 +12,7 @@ import { actions } from 'src/app/todos-store/actions';
 })
 export class TodosComponent implements OnInit {
   todos!: TodoModel[];
+  todos$!: Observable<TodoModel[]>;
   constructor(private store: Store) {}
 
   ngOnInit(): void {
