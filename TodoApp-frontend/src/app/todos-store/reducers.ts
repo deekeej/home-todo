@@ -13,8 +13,8 @@ export const todoReducer = createReducer(
   on(actions.deleteTodoAction, (state, todo) => {
     return [...state.filter((t) => t.id !== todo.id)];
   }),
-  on(actions.getTodosAction, (state) => {
-    return [...state];
+  on(actions.getTodosAction, (state, action) => {
+    return [...state, ...action.todos];
   }),
   on(actions.getCompletedTodoAction, (state) => {
     return [...state.filter((t) => t.completed)];
