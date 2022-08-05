@@ -56,6 +56,16 @@ export class TodosEffects {
       })
     )
   );
+  deleteAllCompletedTodos$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actions.deleteAllCompletedTodoAction),
+      mergeMap((action) => {
+        return this.TodosService.deleteAllCompletedTodos(action.Ids).pipe(
+          map((id) => actions.deleteAllCompletedTodoAction({ Ids: id }))
+        );
+      })
+    )
+  );
 
   constructor(
     private TodosService: BackendService,

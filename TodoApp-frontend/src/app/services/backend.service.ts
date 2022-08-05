@@ -42,4 +42,11 @@ export class BackendService {
   completeAllTodos(Ids: number[]): Observable<number[]> {
     return this.http.put<number[]>(`${this.url}/todos`, Ids, this.httpOptions);
   }
+  deleteAllCompletedTodos(Ids: number[]): Observable<number[]> {
+    console.log(Ids);
+    return this.http.delete<number[]>(
+      `${this.url}/todos?Ids=${Ids}`,
+      this.httpOptions
+    );
+  }
 }

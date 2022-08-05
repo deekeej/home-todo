@@ -25,7 +25,11 @@ export class TodosComponent implements OnInit {
   }
 
   clearCompleted() {
-    this.store.dispatch(actions.clearAllCompletedTodoAction());
+    this.store.dispatch(
+      actions.deleteAllCompletedTodoAction({
+        Ids: this.todos.filter((t) => t.completed).map((t) => t.id),
+      })
+    );
   }
 
   getAll() {

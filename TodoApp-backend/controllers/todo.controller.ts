@@ -76,3 +76,20 @@ export const completeAllTodos = async (req: Request, res: Response) => {
     res.status(400).send(error);
   }
 };
+
+export const deleteCompletedAllTodos = async (req: Request, res: Response) => {
+  try {
+    String(req.query.Ids)
+      .split(",")
+      .map((id) => parseInt(id, 10))
+      .forEach((id: number) => {
+        con.query(`DELETE from todos where id=${id}`, (err) => {
+          if (err) throw err;
+          res.status(200);
+        });
+      });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
+};

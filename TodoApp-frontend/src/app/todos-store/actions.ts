@@ -15,7 +15,10 @@ const completeAllTodoAction = createAction(
   '[TODO] COMPLETE_ALL_TODOS',
   props<{ Ids: number[] }>()
 );
-const clearAllCompletedTodoAction = createAction('[TODO] CLEAR_ALL_TODOS');
+const deleteAllCompletedTodoAction = createAction(
+  '[TODO] CLEAR_ALL_TODOS',
+  props<{ Ids: number[] }>()
+);
 
 export const actions = {
   addTodoAction,
@@ -25,6 +28,6 @@ export const actions = {
   getUncompletedTodoAction,
   getCompletedTodoAction,
   completeAllTodoAction,
-  clearAllCompletedTodoAction,
+  deleteAllCompletedTodoAction,
   getTodosSuccessAction,
 };
