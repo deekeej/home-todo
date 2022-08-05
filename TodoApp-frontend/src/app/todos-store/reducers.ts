@@ -14,7 +14,7 @@ export const todoReducer = createReducer(
     return [...state.filter((t) => t.id !== todo.id)];
   }),
   on(actions.getTodosSuccessAction, (state, action) => {
-    return [...state, ...action.todos];
+    return [...action.todos];
   }),
   on(actions.getTodosAction, (state) => {
     return [...state];
