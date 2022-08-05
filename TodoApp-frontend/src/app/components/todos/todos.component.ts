@@ -4,6 +4,7 @@ import { todosSelector } from '../../todos-store/selectors';
 import { TodoModel } from '../../todos-store/state';
 import { actions } from 'src/app/todos-store/actions';
 import { Observable } from 'rxjs';
+import { BackendService } from 'src/app/services/backend.service';
 
 @Component({
   selector: 'app-todos',
@@ -12,10 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class TodosComponent implements OnInit {
   todos!: TodoModel[];
-  todos$!: Observable<TodoModel[]>;
-  constructor(private store: Store) {
-    this.todos$ = this.store.pipe(select(todosSelector));
-  }
+  constructor(private store: Store, private backend: BackendService) {}
 
   ngOnInit(): void {
     this.store.dispatch(actions.getTodosAction());
@@ -24,6 +22,8 @@ export class TodosComponent implements OnInit {
 
   completeAll() {
     this.store.dispatch(actions.completeAllTodoAction());
+    console.log('hI');
+    this.backend.completeAllTodos(this.todos.map((t) => t.id));
   }
 
   clearCompleted() {

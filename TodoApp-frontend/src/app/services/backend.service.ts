@@ -26,4 +26,20 @@ export class BackendService {
       this.httpOptions
     );
   }
+  deleteTodo(todo: TodoModel): Observable<TodoModel> {
+    return this.http.delete<TodoModel>(
+      `${this.url}/todos/${todo.id}`,
+      this.httpOptions
+    );
+  }
+  updateTodo(todo: TodoModel): Observable<TodoModel> {
+    return this.http.put<TodoModel>(
+      `${this.url}/todos/${todo.id}`,
+      todo,
+      this.httpOptions
+    );
+  }
+  completeAllTodos(Ids: number[]): Observable<number[]> {
+    return this.http.put<number[]>(`${this.url}/todos`, Ids, this.httpOptions);
+  }
 }

@@ -36,15 +36,13 @@ export class TodoItemComponent implements OnInit {
     );
   }
   completeToggle() {
-    if (this.completeTodo) {
-      this.store.dispatch(
-        actions.updateTodoAction({
-          id: this.todo!.id,
-          completed: this.completeTodo,
-          title: this.todo!.title,
-        })
-      );
-    }
+    this.store.dispatch(
+      actions.updateTodoAction({
+        id: this.todo!.id,
+        completed: this.completeTodo,
+        title: this.todo!.title,
+      })
+    );
   }
   deleteTodo() {
     this.store.dispatch(

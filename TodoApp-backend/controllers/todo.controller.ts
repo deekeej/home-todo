@@ -27,9 +27,52 @@ export const addTodo = async (req: Request, res: Response) => {
     (1,"${req.body.title}",${req.body.completed})`,
       (err) => {
         if (err) throw err;
-        res.status(200).send({ success: true });
+        res.status(200);
       }
     );
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
+};
+
+export const deleteTodo = async (req: Request, res: Response) => {
+  try {
+    con.query(`DELETE from todos where id=${req.params.id}`, (err) => {
+      if (err) throw err;
+      res.status(200);
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
+};
+
+export const updateTodo = async (req: Request, res: Response) => {
+  try {
+    con.query(
+      `UPDATE todos set title="${req.body.title}",completed=${req.body.completed} where id=${req.params.id}`,
+      (err) => {
+        if (err) throw err;
+        res.status(200);
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
+};
+
+export const completeAllTodos = async (req: Request, res: Response) => {
+  try {
+    console.log("HI!");
+    console.log(req.body);
+    req.body.Ids.forEach((id: number) => {
+      con.query(`UPDATE todos set completed=1 where id=${id}`, (err) => {
+        if (err) throw err;
+        res.status(200);
+      });
+    });
   } catch (error) {
     console.log(error);
     res.status(400).send(error);
