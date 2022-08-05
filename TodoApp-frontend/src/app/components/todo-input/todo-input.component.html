@@ -1,4 +1,10 @@
 <div class="flex bg-gray-50">
   <input [(ngModel)]="todoInput" class="input px-2 inputIcon" type="text" />
-  <button class="btn blue" (click)="addTodo()">Add</button>
+  <button
+    class="btn blue"
+    (click)="addTodo()"
+    onclick="window.location.href='http://localhost:4200/';"
+  >
+    Add
+  </button>
 </div>
