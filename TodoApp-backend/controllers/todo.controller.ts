@@ -20,3 +20,18 @@ export const getTodos = async (req: Request, res: Response) => {
     res.status(400).send(error);
   }
 };
+export const addTodo = async (req: Request, res: Response) => {
+  try {
+    con.query(
+      `INSERT INTO todos (id_user,title,completed) VALUES 
+    (1,"${req.body.title}",${req.body.completed})`,
+      (err) => {
+        if (err) throw err;
+        res.status(200).send({ success: true });
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
+};

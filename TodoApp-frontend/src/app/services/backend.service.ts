@@ -18,4 +18,12 @@ export class BackendService {
   getAllTodos(): Observable<TodoModel[]> {
     return this.http.get<TodoModel[]>(`${this.url}/todos`);
   }
+
+  addTodo(todo: TodoModel): Observable<TodoModel> {
+    return this.http.post<TodoModel>(
+      `${this.url}/todos`,
+      todo,
+      this.httpOptions
+    );
+  }
 }
