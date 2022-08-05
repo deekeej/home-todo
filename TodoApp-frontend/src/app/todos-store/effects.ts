@@ -46,6 +46,16 @@ export class TodosEffects {
       })
     )
   );
+  completeAllTodos$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actions.completeAllTodoAction),
+      mergeMap((action) => {
+        return this.TodosService.completeAllTodos(action.Ids).pipe(
+          map((id) => actions.completeAllTodoAction({ Ids: id }))
+        );
+      })
+    )
+  );
 
   constructor(
     private TodosService: BackendService,

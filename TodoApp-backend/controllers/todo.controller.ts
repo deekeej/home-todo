@@ -65,9 +65,7 @@ export const updateTodo = async (req: Request, res: Response) => {
 
 export const completeAllTodos = async (req: Request, res: Response) => {
   try {
-    console.log("HI!");
-    console.log(req.body);
-    req.body.Ids.forEach((id: number) => {
+    req.body.forEach((id: number) => {
       con.query(`UPDATE todos set completed=1 where id=${id}`, (err) => {
         if (err) throw err;
         res.status(200);
