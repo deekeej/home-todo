@@ -12,7 +12,7 @@ import { TodosComponent } from './components/todos/todos.component';
 import { TodosEffects } from './todos-store/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
-import { LoginComponent } from './login/login/login.component';
+import { LoginComponent } from './components/authentification/login/login.component';
 import { RegisterComponent } from './components/authentification/register/register.component';
 @NgModule({
   declarations: [
