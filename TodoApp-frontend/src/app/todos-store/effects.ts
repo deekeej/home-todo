@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap } from 'rxjs';
-import { BackendService } from '../services/backend.service';
+import { BackendService } from '../services/todoService/backendTodo.service';
 import { actions } from './actions';
 
 @Injectable()
