@@ -12,8 +12,8 @@ import { TodosComponent } from './components/todos/todos.component';
 import { TodosEffects } from './todos-store/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
-import { LoginComponent } from './components/authentification/login/login.component';
-import { RegisterComponent } from './components/authentification/register/register.component';
+import { RegistrationComponent } from './components/authentication/registration/registration.component';
+import { LoginComponent } from './components/authentication/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,8 +21,8 @@ import { RegisterComponent } from './components/authentification/register/regist
     TodoItemComponent,
     TodoListComponent,
     TodosComponent,
+    RegistrationComponent,
     LoginComponent,
-    RegisterComponent,
   ],
   imports: [
     BrowserModule,

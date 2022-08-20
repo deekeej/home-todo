@@ -2,8 +2,8 @@ import express, { Express } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
-import { router as userRouter } from "./routers/user";
-import { router as todoRouter } from "./routers/todo";
+import { router as userRouter } from "./controllers/user";
+import { router as todoRouter } from "./controllers/todo";
 
 //dotenv set up
 dotenv.config();
