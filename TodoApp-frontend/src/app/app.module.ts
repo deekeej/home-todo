@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { TodoInputComponent } from './components/todos/todos-parts/todo-input/todo-input.component';
 import { TodoItemComponent } from './components/todos/todos-parts/todo-item/todo-item.component';
 import { TodoListComponent } from './components/todos/todos-parts/todo-list/todo-list.component';
-import { todoReducer } from './todos-store/reducers';
+import { todoReducer, UserReducer } from './todos-store/reducers';
 import { StoreModule } from '@ngrx/store';
 import { TodosComponent } from './components/todos/todos.component';
 import { TodosEffects } from './todos-store/effects';

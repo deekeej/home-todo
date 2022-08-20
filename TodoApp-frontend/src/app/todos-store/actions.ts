@@ -1,4 +1,5 @@
-import { TodoModel } from './state';
+import { TodoModel } from '../types/todoModel';
+import { SignUpModel } from '../types/signUpModel';
 import { createAction, props } from '@ngrx/store';
 
 const getTodosAction = createAction('[TODO] GET_TODOS');
@@ -19,6 +20,7 @@ const deleteAllCompletedTodoAction = createAction(
   '[TODO] CLEAR_ALL_TODOS',
   props<{ Ids: number[] }>()
 );
+const addUserAction = createAction('[SignUp] ADD_User', props<SignUpModel>());
 
 export const actions = {
   addTodoAction,
@@ -30,4 +32,5 @@ export const actions = {
   completeAllTodoAction,
   deleteAllCompletedTodoAction,
   getTodosSuccessAction,
+  addUserAction,
 };
