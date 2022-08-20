@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TodoModel } from 'src/app/todos-store/state';
+import { TodoModel } from 'src/app/types/todoModel';
 import { Store } from '@ngrx/store';
 import { todosSelector } from 'src/app/todos-store/selectors';
 

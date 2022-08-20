@@ -23,12 +23,14 @@
       </svg>
     </div>
     <h3 class="text-2xl font-bold text-center">Join Todo App</h3>
-    <form action="">
+    <form (ngSubmit)="onSubmit()">
       <div class="mt-4">
         <div>
           <label class="block" for="Name">Name</label>
           <input
             type="text"
+            [(ngModel)]="name"
+            [ngModelOptions]="{ standalone: true }"
             placeholder="Name"
             class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
           />
@@ -37,6 +39,8 @@
           <label class="block" for="email">Email</label>
           <input
             type="text"
+            [(ngModel)]="email"
+            [ngModelOptions]="{ standalone: true }"
             placeholder="Email"
             class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
           />
@@ -45,6 +49,8 @@
           <label class="block">Password</label>
           <input
             type="password"
+            [(ngModel)]="password"
+            [ngModelOptions]="{ standalone: true }"
             placeholder="Password"
             class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
           />
@@ -53,11 +59,15 @@
           <label class="block">Confirm Password</label>
           <input
             type="password"
+            [(ngModel)]="confirmPassword"
+            [ngModelOptions]="{ standalone: true }"
             placeholder="Password"
             class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
           />
         </div>
-        <span class="text-xs text-red-400">Password must be same!</span>
+        <div *ngIf="!isPasswordConfirmed">
+          <span class="text-xs text-red-400">Password must be same!</span>
+        </div>
         <div class="flex">
           <button
             class="w-full px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900"

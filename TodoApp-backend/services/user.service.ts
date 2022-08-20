@@ -20,3 +20,13 @@ export const getUsers = async (req: Request, res: Response) => {
     res.status(400).send(error);
   }
 };
+
+export const addUser = async (req: Request, res: Response) => {
+  try {
+    console.log("YEah");
+    res.status(200).send();
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
+};

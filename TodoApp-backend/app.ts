@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // select all authors
 
 // routes
-app.use("/user", userRouter);
+app.use("/authenticate", userRouter);
 app.use("/api", todoRouter);
 
 // server setup

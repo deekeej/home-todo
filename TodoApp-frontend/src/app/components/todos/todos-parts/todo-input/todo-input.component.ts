@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { TodoModel } from '../../../../todos-store/state';
+import { TodoModel } from 'src/app/types/todoModel';
 import { todosSelector } from '../../../../todos-store/selectors';
 import { actions } from '../../../../todos-store/actions';
 @Component({

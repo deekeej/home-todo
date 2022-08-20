@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TodoModel } from 'src/app/todos-store/state';
+import { TodoModel } from 'src/app/types/todoModel';
 import { Store } from '@ngrx/store';
 import { actions } from 'src/app/todos-store/actions';
 

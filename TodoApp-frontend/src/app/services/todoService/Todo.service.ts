@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { TodoModel } from '../../todos-store/state';
+import { TodoModel } from 'src/app/types/todoModel';
 @Injectable({
   providedIn: 'root',
 })
-export class BackendService {
+export class TodoService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

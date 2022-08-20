@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { TodoModel, todos } from './state';
+import { TodoModel } from '../types/todoModel';
+import { todos, user } from './state';
 import { actions } from './actions';
 
 export const todoReducer = createReducer(
@@ -37,5 +38,12 @@ export const todoReducer = createReducer(
   }),
   on(actions.deleteAllCompletedTodoAction, (state) => {
     return [...state.filter((t) => !t.completed)];
+  })
+);
+
+export const UserReducer = createReducer(
+  user,
+  on(actions.addUserAction, (user) => {
+    return user;
   })
 );

@@ -1,5 +1,5 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { TodoModel } from './state';
+import { TodoModel } from '../types/todoModel';
 
 export const todosSelector = createSelector(
   createFeatureSelector('todos'),
