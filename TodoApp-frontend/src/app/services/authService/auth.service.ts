@@ -17,7 +17,7 @@ export class AuthService {
 
   postSignUp(user: SignUpModel): Observable<SignUpModel> {
     return this.http.post<SignUpModel>(
-      `${this.url}/user`,
+      `${this.url}/users`,
       user,
       this.httpOptions
     );

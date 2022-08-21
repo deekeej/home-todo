@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { con } from "../database/database";
+import bcrypt from "bcryptjs";
 
 export const getUsers = async (req: Request, res: Response) => {
   try {
@@ -23,8 +24,13 @@ export const getUsers = async (req: Request, res: Response) => {
 
 export const addUser = async (req: Request, res: Response) => {
   try {
-    console.log("YEah");
-    res.status(200).send();
+    // const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    console.log(req.body.Password);
+    res
+      .writeHead(301, {
+        Location: `http://localhost:4200/login`,
+      })
+      .end();
   } catch (error) {
     console.log(error);
     res.status(400).send(error);

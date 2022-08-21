@@ -35,6 +35,12 @@
             class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
           />
         </div>
+        <div *ngIf="!isNameValid">
+          <span class="text-xs text-red-400"
+            >Length has to be equal or bigger than three characters and numbers
+            are not valid!</span
+          >
+        </div>
         <div class="mt-4">
           <label class="block" for="email">Email</label>
           <input
@@ -45,6 +51,11 @@
             class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
           />
         </div>
+        <div *ngIf="!isEmailValid">
+          <span class="text-xs text-red-400"
+            >That does not look like valid email!</span
+          >
+        </div>
         <div class="mt-4">
           <label class="block">Password</label>
           <input
@@ -54,6 +65,12 @@
             placeholder="Password"
             class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
           />
+        </div>
+        <div *ngIf="!isPasswordValid">
+          <span class="text-xs text-red-400"
+            >Minimum eight characters, at least one letter, one number and one
+            special character!</span
+          >
         </div>
         <div class="mt-4">
           <label class="block">Confirm Password</label>
@@ -67,6 +84,9 @@
         </div>
         <div *ngIf="!isPasswordConfirmed">
           <span class="text-xs text-red-400">Password must be same!</span>
+        </div>
+        <div *ngIf="!isAllFill">
+          <span class="text-xs text-red-400">Fill all fields!</span>
         </div>
         <div class="flex">
           <button

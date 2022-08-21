@@ -9,7 +9,7 @@ import { TodoListComponent } from './components/todos/todos-parts/todo-list/todo
 import { todoReducer, UserReducer } from './todos-store/reducers';
 import { StoreModule } from '@ngrx/store';
 import { TodosComponent } from './components/todos/todos.component';
-import { TodosEffects } from './todos-store/effects';
+import { TodosEffects, UserEffects } from './todos-store/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { RegistrationComponent } from './components/authentication/registration/registration.component';

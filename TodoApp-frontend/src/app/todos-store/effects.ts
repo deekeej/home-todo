@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap } from 'rxjs';
-import { TodoService } from '../services/todoService/Todo.service';
+import { AuthService } from '../services/authService/auth.service';
+import { TodoService } from '../services/todoService/todo.service';
 import { actions } from './actions';
 
 @Injectable()
@@ -68,4 +69,8 @@ export class TodosEffects {
   );
 
   constructor(private TodosService: TodoService, private actions$: Actions) {}
+}
+
+export class UserEffects {
+  constructor(private authService: AuthService, private actions$: Actions) {}
 }
