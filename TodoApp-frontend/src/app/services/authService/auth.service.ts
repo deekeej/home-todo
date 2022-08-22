@@ -9,7 +9,9 @@ export class AuthService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
     }),
+    responseType: 'text' as 'json',
   };
 
   url = `http://localhost:3000/authenticate`;

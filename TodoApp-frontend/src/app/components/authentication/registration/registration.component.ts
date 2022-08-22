@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SignUpModel } from 'src/app/types/signUpModel';
 import { AuthService } from 'src/app/services/authService/auth.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -17,8 +17,10 @@ export class RegistrationComponent implements OnInit {
   isEmailValid!: boolean;
   isAllFill!: boolean;
   isPasswordValid!: boolean;
+  response!: string;
+  isNotEmailUsed!: boolean;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.isPasswordConfirmed = true;
@@ -26,6 +28,7 @@ export class RegistrationComponent implements OnInit {
     this.isNameValid = true;
     this.isAllFill = true;
     this.isPasswordValid = true;
+    this.isNotEmailUsed = true;
   }
 
   onSubmit() {
@@ -51,7 +54,14 @@ export class RegistrationComponent implements OnInit {
       Email: this.email,
       Password: this.password,
     };
-    this.authService.postSignUp(user).subscribe();
+    this.authService.postSignUp(user).subscribe((res) => {
+      this.response = JSON.parse(JSON.stringify(res));
+      if (this.response === '{"message":"success"}') {
+        this.router.navigateByUrl('/login');
+      } else if (this.response === '{"message":"exists"}') {
+        this.isNotEmailUsed = false;
+      }
+    });
   }
 
   validationOfEmail(): boolean {

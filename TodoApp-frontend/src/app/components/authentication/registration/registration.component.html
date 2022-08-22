@@ -88,6 +88,11 @@
         <div *ngIf="!isAllFill">
           <span class="text-xs text-red-400">Fill all fields!</span>
         </div>
+        <div *ngIf="!isNotEmailUsed">
+          <span class="text-xs text-red-400"
+            >Email address is already used!</span
+          >
+        </div>
         <div class="flex">
           <button
             class="w-full px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900"
