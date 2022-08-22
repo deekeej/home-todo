@@ -19,7 +19,7 @@ export class AuthService {
 
   postSignUp(user: SignUpModel): Observable<SignUpModel> {
     return this.http.post<SignUpModel>(
-      `${this.url}/users`,
+      `${this.url}/users/register`,
       user,
       this.httpOptions
     );

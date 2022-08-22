@@ -70,7 +70,3 @@ export class TodosEffects {
 
   constructor(private TodosService: TodoService, private actions$: Actions) {}
 }
-
-export class UserEffects {
-  constructor(private authService: AuthService, private actions$: Actions) {}
-}

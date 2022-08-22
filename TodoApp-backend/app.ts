@@ -4,6 +4,7 @@ import cors from "cors";
 import path from "path";
 import { router as userRouter } from "./controllers/user";
 import { router as todoRouter } from "./controllers/todo";
+import cookieParser from "cookie-parser";
 
 //dotenv set up
 dotenv.config();
@@ -12,13 +13,21 @@ dotenv.config();
 export const app: Express = express();
 app.use(express.json());
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:4200",
+      "http://localhost:8080",
+    ],
+    credentials: true,
+  })
+);
 
 // public folder
 app.use(express.static(path.join(__dirname, "public")));
-
-//database connection
-// select all authors
+//cookie parser
+app.use(cookieParser());
 
 // routes
 app.use("/authenticate", userRouter);
