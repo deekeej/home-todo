@@ -186,8 +186,26 @@ export const refresh = async (req: Request, res: Response) => {
       "access_secret",
       { expiresIn: "30s" }
     );
-
-    res.send({ token });
+    con.query(
+      `SELECT *,COUNT(*) AS cnt FROM tokens WHERE id_user =${
+        payload.id
+      } AND DATE(expired_at) >="${new Date()
+        .toISOString()
+        .slice(0, 19)
+        .replace("T", " ")}"`,
+      function (err, data) {
+        if (err) {
+          console.log(err);
+        } else {
+          if (data[0].cnt > 0) {
+            // Already exist
+            res.send({ token });
+          } else {
+            res.status(401).send({ message: "unauthenticated" });
+          }
+        }
+      }
+    );
   } catch (error) {
     console.log(error);
     res.status(400).send(error);
@@ -195,6 +213,11 @@ export const refresh = async (req: Request, res: Response) => {
 };
 
 export const logout = async (req: Request, res: Response) => {
+  const refreshToken = req.cookies["refreshToken"];
+  con.query(`DELETE FROM tokens WHERE token="${refreshToken}"`, function (err) {
+    if (err) throw err;
+  });
   res.cookie("refreshToken", "", { maxAge: 0 });
+
   res.status(200).send({ message: "success" });
 };
