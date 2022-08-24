@@ -17,7 +17,7 @@
         >
           Sign in to your account
         </h1>
-        <form class="space-y-4 md:space-y-6" action="#">
+        <form class="space-y-4 md:space-y-6" (ngSubmit)="onSubmit()">
           <div>
             <label
               for="email"
@@ -27,6 +27,8 @@
             <input
               type="email"
               name="email"
+              [(ngModel)]="email"
+              [ngModelOptions]="{ standalone: true }"
               id="email"
               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="name@company.com"
@@ -42,11 +44,16 @@
             <input
               type="password"
               name="password"
+              [(ngModel)]="password"
+              [ngModelOptions]="{ standalone: true }"
               id="password"
               placeholder="••••••••"
               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               required=""
             />
+          </div>
+          <div *ngIf="!isLoginValid">
+            <span class="text-xs text-red-400">Invalid email or password!</span>
           </div>
           <div class="flex items-center justify-between">
             <div class="flex items-start">

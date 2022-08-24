@@ -34,13 +34,13 @@ export class RegistrationComponent implements OnInit {
   onSubmit() {
     if (!this.password || !this.confirmPassword || !this.name || !this.email) {
       this.isAllFill = false;
-    } else if (!this.validationOfPassword()) {
+    } else if (!this.authService.validationOfPassword(this.password)) {
       this.isPasswordValid = false;
     } else if (this.password !== this.confirmPassword) {
       this.isPasswordConfirmed = false;
-    } else if (!this.validationOfEmail()) {
+    } else if (!this.authService.validationOfEmail(this.email)) {
       this.isEmailValid = false;
-    } else if (!this.validationOfName()) {
+    } else if (!this.authService.validationOfName(this.name)) {
       this.isNameValid = false;
     } else {
       this.isPasswordConfirmed = true;
@@ -54,7 +54,7 @@ export class RegistrationComponent implements OnInit {
       Email: this.email,
       Password: this.password,
     };
-    this.authService.postSignUp(user).subscribe((res) => {
+    this.authService.signUp(user).subscribe((res) => {
       this.response = JSON.parse(JSON.stringify(res));
       if (this.response === '{"message":"success"}') {
         this.router.navigateByUrl('/login');
@@ -62,19 +62,5 @@ export class RegistrationComponent implements OnInit {
         this.isNotEmailUsed = false;
       }
     });
-  }
-
-  validationOfEmail(): boolean {
-    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email);
-  }
-
-  validationOfName(): boolean {
-    return /^[a-zA-Z]{3,}$/.test(this.name);
-  }
-
-  validationOfPassword(): boolean {
-    return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(
-      this.password
-    );
   }
 }

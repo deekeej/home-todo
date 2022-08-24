@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { todosSelector } from '../../todos-store/selectors';
 import { TodoModel } from 'src/app/types/todoModel';
 import { actions } from 'src/app/todos-store/actions';
+import { AuthService } from 'src/app/services/authService/auth.service';
 
 @Component({
   selector: 'app-todos',
@@ -11,9 +12,10 @@ import { actions } from 'src/app/todos-store/actions';
 })
 export class TodosComponent implements OnInit {
   todos!: TodoModel[];
-  constructor(private store: Store) {}
+  constructor(private store: Store, private authService: AuthService) {}
 
   ngOnInit(): void {
+    // this.authService.authenticate().subscribe();
     this.store.dispatch(actions.getTodosAction());
     this.store.select(todosSelector).subscribe((state) => (this.todos = state));
   }

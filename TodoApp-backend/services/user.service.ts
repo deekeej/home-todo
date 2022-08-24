@@ -22,15 +22,8 @@ export const logIn = async (req: Request, res: Response) => {
                 if (
                   !(await bcrypt.compare(req.body.Password, data[0].Password))
                 ) {
-                  res.status(200).send({ message: "Wrong password!" });
+                  res.status(401).send({ message: "Wrong password!" });
                 }
-                const accessToken = sign(
-                  {
-                    id: data[0].id,
-                  },
-                  "access_secret",
-                  { expiresIn: "30s" }
-                );
 
                 const refreshToken = sign(
                   {
@@ -40,26 +33,50 @@ export const logIn = async (req: Request, res: Response) => {
                   { expiresIn: "1w" }
                 );
 
-                res.cookie("accessToken", accessToken, {
-                  httpOnly: true, // fronted can not access this cookie
-                  maxAge: 24 * 60 * 60 * 1000, // 1 day
-                });
-
                 res.cookie("refreshToken", refreshToken, {
                   httpOnly: true,
                   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
                 });
-                res.status(200).send({ message: "success" });
+
+                const created_at = new Date();
+
+                const expired_at = new Date();
+                expired_at.setDate(expired_at.getDate() + 7);
+
+                con.query(
+                  `INSERT INTO tokens (id_user,token,created_at,expired_at) VALUES 
+                (${data[0].id},"${refreshToken}","${created_at
+                    .toISOString()
+                    .slice(0, 19)
+                    .replace("T", " ")}",
+                    "${expired_at
+                      .toISOString()
+                      .slice(0, 19)
+                      .replace("T", " ")}")`,
+                  (err) => {
+                    if (err) throw err;
+                  }
+                );
+
+                const token = sign(
+                  {
+                    id: data[0].id,
+                  },
+                  "access_secret",
+                  { expiresIn: "30s" }
+                );
+
+                res.send({ token: token });
               })();
             } else {
-              res.status(200).send({ message: "User doesn`t exist!" });
+              res.status(404).send({ message: "User doesn`t exist!" });
             }
           }
         }
       );
     } else {
       //when somebody is trying to evade our validation on frontend with postman etc.
-      res.status(200).send({ message: "Something went wrong!" });
+      res.status(404).send({ message: "Something went wrong!" });
     }
   } catch (error) {
     res.status(400).send(error);
@@ -78,7 +95,7 @@ export const signUp = async (req: Request, res: Response) => {
         } else {
           if (data[0].cnt > 0) {
             // Already exist
-            res.status(200).send({ message: "exists" });
+            res.status(404).send({ message: "exists" });
           } else {
             if (
               validationOfEmail(req.body.Email) &&
@@ -99,7 +116,7 @@ export const signUp = async (req: Request, res: Response) => {
                 }
               );
             } else {
-              res.status(200).send({ message: "exists" });
+              res.status(404).send({ message: "exists" });
             }
           }
         }
@@ -126,10 +143,10 @@ function validationOfPassword(password: string): boolean {
 
 export const authenticate = async (req: Request, res: Response) => {
   try {
-    const accessToken = req.cookies["accessToken"];
+    const accessToken = req.header("Authorization")?.split(" ")[1] || "";
     const payload: any = verify(accessToken, "access_secret");
     if (!payload) {
-      res.status(200).send({ message: "unauthenticated" });
+      res.status(401).send({ message: "unauthenticated" });
     }
     con.query(
       "SELECT *,COUNT(*) AS cnt FROM users WHERE id = ? ",
@@ -143,7 +160,7 @@ export const authenticate = async (req: Request, res: Response) => {
             const { Password, cnt, ...auth } = data[0];
             res.send(auth);
           } else {
-            res.status(200).send({ message: "unauthenticated" });
+            res.status(401).send({ message: "unauthenticated" });
           }
         }
       }
@@ -159,10 +176,10 @@ export const refresh = async (req: Request, res: Response) => {
     const refreshToken = req.cookies["refreshToken"];
     const payload: any = verify(refreshToken, "refresh_secret");
     if (!payload) {
-      res.status(200).send({ message: "unauthenticated" });
+      res.status(401).send({ message: "unauthenticated" });
     }
 
-    const accessToken = sign(
+    const token = sign(
       {
         id: payload.id,
       },
@@ -170,12 +187,7 @@ export const refresh = async (req: Request, res: Response) => {
       { expiresIn: "30s" }
     );
 
-    res.cookie("accessToken", accessToken, {
-      httpOnly: true, // fronted can not access this cookie
-      maxAge: 24 * 60 * 60 * 1000, // 1 day
-    });
-
-    res.status(200).send({ message: "success" });
+    res.send({ token });
   } catch (error) {
     console.log(error);
     res.status(400).send(error);
@@ -183,7 +195,6 @@ export const refresh = async (req: Request, res: Response) => {
 };
 
 export const logout = async (req: Request, res: Response) => {
-  res.cookie("accessToken", "", { maxAge: 0 });
   res.cookie("refreshToken", "", { maxAge: 0 });
   res.status(200).send({ message: "success" });
 };

@@ -6,14 +6,15 @@ import { AppComponent } from './app.component';
 import { TodoInputComponent } from './components/todos/todos-parts/todo-input/todo-input.component';
 import { TodoItemComponent } from './components/todos/todos-parts/todo-item/todo-item.component';
 import { TodoListComponent } from './components/todos/todos-parts/todo-list/todo-list.component';
-import { todoReducer, UserReducer } from './todos-store/reducers';
+import { todoReducer } from './todos-store/reducers';
 import { StoreModule } from '@ngrx/store';
 import { TodosComponent } from './components/todos/todos.component';
-import { TodosEffects, UserEffects } from './todos-store/effects';
-import { HttpClientModule } from '@angular/common/http';
+import { TodosEffects } from './todos-store/effects';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { RegistrationComponent } from './components/authentication/registration/registration.component';
 import { LoginComponent } from './components/authentication/login/login.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,13 @@ import { LoginComponent } from './components/authentication/login/login.componen
     EffectsModule.forRoot([TodosEffects]),
     EffectsModule.forFeature([TodosEffects]),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

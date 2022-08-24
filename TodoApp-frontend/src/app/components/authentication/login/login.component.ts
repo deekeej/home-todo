@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { LogInModel } from 'src/app/types/logInModel';
+import { AuthService } from 'src/app/services/authService/auth.service';
+import { Router } from '@angular/router';
+import { AuthInterceptor } from 'src/app/interceptors/auth.interceptor';
 
 @Component({
   selector: 'app-login',
@@ -6,7 +10,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor() {}
+  email!: string;
+  password!: string;
+  response!: string;
+  isLoginValid!: boolean;
 
-  ngOnInit(): void {}
+  constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.isLoginValid = true;
+  }
+
+  onSubmit() {
+    this.logIn();
+  }
+
+  logIn() {
+    let user: LogInModel = {
+      Email: this.email,
+      Password: this.password,
+    };
+    this.authService.logIn(user).subscribe((res: any) => {
+      this.response = JSON.parse(JSON.stringify(res));
+      if (this.response.length > 100) {
+        this.router.navigateByUrl('/');
+      } else {
+        this.isLoginValid = false;
+      }
+      AuthInterceptor.accessToken = res.token;
+    });
+  }
 }
