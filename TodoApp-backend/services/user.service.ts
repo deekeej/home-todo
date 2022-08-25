@@ -167,7 +167,7 @@ export const authenticate = async (req: Request, res: Response) => {
     );
   } catch (error) {
     console.log(error);
-    res.status(400).send(error);
+    res.status(401).send({ message: "unauthenticated" });
   }
 };
 
@@ -208,7 +208,7 @@ export const refresh = async (req: Request, res: Response) => {
     );
   } catch (error) {
     console.log(error);
-    res.status(401).send(error);
+    res.status(401).send({ message: "unauthenticated" });
   }
 };
 
