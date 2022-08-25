@@ -15,7 +15,7 @@ export class TodosComponent implements OnInit {
   constructor(private store: Store, private authService: AuthService) {}
 
   ngOnInit(): void {
-    // this.authService.authenticate().subscribe();
+    this.authService.authenticate().subscribe();
     this.store.dispatch(actions.getTodosAction());
     this.store.select(todosSelector).subscribe((state) => (this.todos = state));
   }

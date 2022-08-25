@@ -13,6 +13,7 @@ import { catchError, Observable, switchMap, throwError } from 'rxjs';
 export class AuthInterceptor implements HttpInterceptor {
   static accessToken = '';
   refresh = false;
+
   constructor(private http: HttpClient) {}
 
   intercept(
@@ -24,10 +25,12 @@ export class AuthInterceptor implements HttpInterceptor {
         Authorization: `Bearer ${AuthInterceptor.accessToken}`,
       },
     });
+
     return next.handle(req).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err.status === 401 && !this.refresh) {
           this.refresh = true;
+
           return this.http
             .post(
               'http://localhost:3000/authenticate/users/refresh',
@@ -37,6 +40,7 @@ export class AuthInterceptor implements HttpInterceptor {
             .pipe(
               switchMap((res: any) => {
                 AuthInterceptor.accessToken = res.token;
+
                 return next.handle(
                   request.clone({
                     setHeaders: {

@@ -37,7 +37,10 @@ export class LoginComponent implements OnInit {
       } else {
         this.isLoginValid = false;
       }
-      AuthInterceptor.accessToken = res.token;
+      AuthInterceptor.accessToken = this.response.substring(
+        10,
+        this.response.length - 2
+      );
     });
   }
 }

@@ -199,7 +199,7 @@ export const refresh = async (req: Request, res: Response) => {
         } else {
           if (data[0].cnt > 0) {
             // Already exist
-            res.send({ token });
+            res.status(200).send({ token });
           } else {
             res.status(401).send({ message: "unauthenticated" });
           }
@@ -208,7 +208,7 @@ export const refresh = async (req: Request, res: Response) => {
     );
   } catch (error) {
     console.log(error);
-    res.status(400).send(error);
+    res.status(401).send(error);
   }
 };
 
