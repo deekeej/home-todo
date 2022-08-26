@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class TodoInputComponent implements OnInit {
   todoInput?: string;
   todos?: TodoModel[];
+  idOfCurrentUser!: number;
   constructor(
     private store: Store,
     private authService: AuthService,
@@ -22,12 +23,21 @@ export class TodoInputComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.authenticate().subscribe({
-      next: (res: any) => {},
+      next: (res: any) => {
+        console.log(res.id);
+        this.idOfCurrentUser = res.id;
+        this.store.dispatch(
+          actions.getTodosAction({ id: this.idOfCurrentUser })
+        );
+        this.store
+          .select(todosSelector)
+          .subscribe((state) => (this.todos = state));
+        console.log('1', this.idOfCurrentUser);
+      },
       error: () => {
         this.router.navigateByUrl('/login');
       },
     });
-    this.store.select(todosSelector).subscribe((state) => (this.todos = state));
   }
 
   addTodo() {
@@ -35,7 +45,8 @@ export class TodoInputComponent implements OnInit {
     }
     this.store.dispatch(
       actions.addTodoAction({
-        id: this.todos!.length,
+        id: this.idOfCurrentUser,
+        id_user: 0,
         title: this.todoInput!,
         completed: false,
       })

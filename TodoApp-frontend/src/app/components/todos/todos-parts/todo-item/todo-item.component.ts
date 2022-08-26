@@ -30,6 +30,7 @@ export class TodoItemComponent implements OnInit {
     this.store.dispatch(
       actions.updateTodoAction({
         id: this.todo!.id,
+        id_user: 0,
         completed: this.todo!.completed,
         title: this.todoInput!,
       })
@@ -39,6 +40,7 @@ export class TodoItemComponent implements OnInit {
     this.store.dispatch(
       actions.updateTodoAction({
         id: this.todo!.id,
+        id_user: 0,
         completed: this.completeTodo,
         title: this.todo!.title,
       })
@@ -48,6 +50,7 @@ export class TodoItemComponent implements OnInit {
     this.store.dispatch(
       actions.deleteTodoAction({
         id: this.todo!.id,
+        id_user: 0,
         completed: this.todo!.completed,
         title: this.todo!.title,
       })

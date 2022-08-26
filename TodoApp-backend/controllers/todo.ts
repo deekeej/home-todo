@@ -3,7 +3,7 @@ import * as todoService from "../services/todo.service";
 
 export const router: Router = Router();
 
-router.get("/todos", todoService.getTodos);
+router.get("/todos/:id", todoService.getTodos);
 router.post("/todos", todoService.addTodo);
 router.delete("/todos/:id", todoService.deleteTodo);
 router.delete("/todos", todoService.deleteCompletedAllTodos);

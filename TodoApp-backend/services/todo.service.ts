@@ -4,12 +4,15 @@ import { TodoModel } from "../types/todoModel";
 
 export const getTodos = async (req: Request, res: Response) => {
   try {
-    con.query("SELECT id,title,completed FROM todos", (err, rows) => {
-      if (err) throw err;
-      let todos: TodoModel[] = JSON.parse(JSON.stringify(rows));
-      console.log(rows);
-      res.status(200).send(todos);
-    });
+    con.query(
+      `SELECT id,id_user,title,completed FROM todos where id_user=${req.params.id}`,
+      (err, rows) => {
+        if (err) throw err;
+        let todos: TodoModel[] = JSON.parse(JSON.stringify(rows));
+        console.log(rows);
+        res.status(200).send(todos);
+      }
+    );
     // con.end((err) => {
     //   // The connection is terminated gracefully
     //   // Ensures all remaining queries are executed
@@ -24,7 +27,7 @@ export const addTodo = async (req: Request, res: Response) => {
   try {
     con.query(
       `INSERT INTO todos (id_user,title,completed) VALUES 
-    (1,"${req.body.title}",${req.body.completed})`,
+    (${req.body.id},"${req.body.title}",${req.body.completed})`,
       (err) => {
         if (err) throw err;
         res.status(200);

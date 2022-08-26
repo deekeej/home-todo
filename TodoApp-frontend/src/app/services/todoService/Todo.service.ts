@@ -15,8 +15,8 @@ export class TodoService {
   url = `http://localhost:3000/api`;
   constructor(private http: HttpClient) {}
 
-  getAllTodos(): Observable<TodoModel[]> {
-    return this.http.get<TodoModel[]>(`${this.url}/todos`);
+  getAllTodos(id: number): Observable<TodoModel[]> {
+    return this.http.get<TodoModel[]>(`${this.url}/todos/${id}`);
   }
 
   addTodo(todo: TodoModel): Observable<TodoModel> {

@@ -1,7 +1,10 @@
 import { TodoModel } from '../types/todoModel';
 import { createAction, props } from '@ngrx/store';
 
-const getTodosAction = createAction('[TODO] GET_TODOS');
+const getTodosAction = createAction(
+  '[TODO] GET_TODOS',
+  props<{ id: number }>()
+);
 const getTodosSuccessAction = createAction(
   '[TODO] GET_TODOS_SUCCESS',
   props<{ todos: TodoModel[] }>()
