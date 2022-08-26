@@ -54,13 +54,13 @@ export class RegistrationComponent implements OnInit {
       Email: this.email,
       Password: this.password,
     };
-    this.authService.signUp(user).subscribe((res) => {
-      this.response = JSON.parse(JSON.stringify(res));
-      if (this.response === '{"message":"success"}') {
+    this.authService.signUp(user).subscribe({
+      next: (res: any) => {
         this.router.navigateByUrl('/login');
-      } else if (this.response === '{"message":"exists"}') {
+      },
+      error: () => {
         this.isNotEmailUsed = false;
-      }
+      },
     });
   }
 }

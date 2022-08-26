@@ -57,7 +57,6 @@ export const logIn = async (req: Request, res: Response) => {
                     if (err) throw err;
                   }
                 );
-
                 const token = sign(
                   {
                     id: data[0].id,
@@ -65,18 +64,17 @@ export const logIn = async (req: Request, res: Response) => {
                   "access_secret",
                   { expiresIn: "30s" }
                 );
-
                 res.send({ token: token });
               })();
             } else {
-              res.status(404).send({ message: "User doesn`t exist!" });
+              res.status(401).send({ message: "User doesn`t exist!" });
             }
           }
         }
       );
     } else {
       //when somebody is trying to evade our validation on frontend with postman etc.
-      res.status(404).send({ message: "Something went wrong!" });
+      res.status(401).send({ message: "Something went wrong!" });
     }
   } catch (error) {
     res.status(400).send(error);

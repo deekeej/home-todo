@@ -30,17 +30,18 @@ export class LoginComponent implements OnInit {
       Email: this.email,
       Password: this.password,
     };
-    this.authService.logIn(user).subscribe((res: any) => {
-      this.response = JSON.parse(JSON.stringify(res));
-      if (this.response.length > 100) {
+    this.authService.logIn(user).subscribe({
+      next: (res: any) => {
+        this.response = JSON.parse(JSON.stringify(res));
+        AuthInterceptor.accessToken = this.response.substring(
+          10,
+          this.response.length - 2
+        );
         this.router.navigateByUrl('/');
-      } else {
+      },
+      error: () => {
         this.isLoginValid = false;
-      }
-      AuthInterceptor.accessToken = this.response.substring(
-        10,
-        this.response.length - 2
-      );
+      },
     });
   }
 }
