@@ -3,6 +3,9 @@ import { Store } from '@ngrx/store';
 import { TodoModel } from 'src/app/types/todoModel';
 import { todosSelector } from '../../../../todos-store/selectors';
 import { actions } from '../../../../todos-store/actions';
+import { AuthService } from 'src/app/services/authService/auth.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-todo-input',
   templateUrl: './todo-input.component.html',
@@ -11,9 +14,19 @@ import { actions } from '../../../../todos-store/actions';
 export class TodoInputComponent implements OnInit {
   todoInput?: string;
   todos?: TodoModel[];
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.authService.authenticate().subscribe({
+      next: (res: any) => {},
+      error: () => {
+        this.router.navigateByUrl('/login');
+      },
+    });
     this.store.select(todosSelector).subscribe((state) => (this.todos = state));
   }
 

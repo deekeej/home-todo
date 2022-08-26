@@ -39,6 +39,14 @@ export class AuthService {
     return this.http.get<any>(`${this.url}/users/user`);
   }
 
+  logout(): Observable<any> {
+    return this.http.post<any>(
+      `${this.url}/users/logout`,
+      {},
+      this.httpOptions
+    );
+  }
+
   validationOfEmail(email: string): boolean {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
   }

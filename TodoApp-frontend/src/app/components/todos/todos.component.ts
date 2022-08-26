@@ -4,6 +4,8 @@ import { todosSelector } from '../../todos-store/selectors';
 import { TodoModel } from 'src/app/types/todoModel';
 import { actions } from 'src/app/todos-store/actions';
 import { AuthService } from 'src/app/services/authService/auth.service';
+import { Router } from '@angular/router';
+import { AuthInterceptor } from 'src/app/interceptors/auth.interceptor';
 
 @Component({
   selector: 'app-todos',
@@ -12,10 +14,13 @@ import { AuthService } from 'src/app/services/authService/auth.service';
 })
 export class TodosComponent implements OnInit {
   todos!: TodoModel[];
-  constructor(private store: Store, private authService: AuthService) {}
+  constructor(
+    private store: Store,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.authService.authenticate().subscribe();
     this.store.dispatch(actions.getTodosAction());
     this.store.select(todosSelector).subscribe((state) => (this.todos = state));
   }
@@ -43,5 +48,12 @@ export class TodosComponent implements OnInit {
 
   getUncompleted() {
     this.store.dispatch(actions.getUncompletedTodoAction());
+  }
+
+  logout() {
+    this.authService.logout().subscribe(() => {
+      AuthInterceptor.accessToken = '';
+      this.router.navigateByUrl('/login');
+    });
   }
 }
