@@ -6,7 +6,6 @@ import { actions } from 'src/app/todos-store/actions';
 import { AuthService } from 'src/app/services/authService/auth.service';
 import { Router } from '@angular/router';
 import { AuthInterceptor } from 'src/app/interceptors/auth.interceptor';
-import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-todos',
