@@ -36,4 +36,6 @@ app.use("/api", todoRouter);
 // server setup
 const PORT: number =
   process.env.NODE_ENV === "test" ? 3300 : Number(process.env.PORT) || 3000;
-app.listen(PORT, (): void => console.log(`server running on port: ${PORT}`));
+app.listen(Number(process.env.PORT) || PORT, (): void =>
+  console.log(`server running on port: ${PORT}`)
+);
