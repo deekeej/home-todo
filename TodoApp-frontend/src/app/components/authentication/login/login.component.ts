@@ -3,7 +3,6 @@ import { LogInModel } from 'src/app/types/logInModel';
 import { AuthService } from 'src/app/services/authService/auth.service';
 import { Router } from '@angular/router';
 import { AuthInterceptor } from 'src/app/interceptors/auth.interceptor';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

@@ -8,13 +8,14 @@ import {
   HttpClient,
 } from '@angular/common/http';
 import { catchError, Observable, switchMap, throwError } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   static accessToken = '';
   refresh = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cookieService: CookieService) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -33,14 +34,13 @@ export class AuthInterceptor implements HttpInterceptor {
 
           return this.http
             .post(
-              'http://localhost:3000/authenticate/users/refresh',
+              'https://todo-back.fly.dev/authenticate/users/refresh',
               {},
               { withCredentials: true }
             )
             .pipe(
               switchMap((res: any) => {
                 AuthInterceptor.accessToken = res.token;
-
                 return next.handle(
                   request.clone({
                     setHeaders: {

@@ -9,10 +9,12 @@ export class TodoService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
     }),
+    withCredentials: true,
   };
 
-  url = `http://localhost:3000/api`;
+  url = 'https://todo-back.fly.dev/api';
   constructor(private http: HttpClient) {}
 
   getAllTodos(id: number): Observable<TodoModel[]> {
@@ -20,6 +22,7 @@ export class TodoService {
   }
 
   addTodo(todo: TodoModel): Observable<TodoModel> {
+    console.log('IAM adding!');
     return this.http.post<TodoModel>(
       `${this.url}/todos`,
       todo,

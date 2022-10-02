@@ -16,7 +16,7 @@ export class AuthService {
     withCredentials: true,
   };
 
-  url = `http://localhost:3000/authenticate`;
+  url = 'https://todo-back.fly.dev/authenticate';
   constructor(private http: HttpClient) {}
 
   logIn(user: LogInModel): Observable<LogInModel> {

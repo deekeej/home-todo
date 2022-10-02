@@ -51,6 +51,7 @@ export class TodoInputComponent implements OnInit {
         completed: false,
       })
     );
+    this.store.dispatch(actions.getTodosAction({ id: this.idOfCurrentUser }));
     this.todoInput = '';
   }
 }

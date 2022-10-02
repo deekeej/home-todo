@@ -35,6 +35,8 @@ export const logIn = async (req: Request, res: Response) => {
 
                 res.cookie("refreshToken", refreshToken, {
                   httpOnly: true,
+                  sameSite: "none",
+                  secure: true,
                   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
                 });
 
@@ -64,6 +66,7 @@ export const logIn = async (req: Request, res: Response) => {
                   "access_secret",
                   { expiresIn: "30s" }
                 );
+                console.log("sending token !");
                 res.send({ token: token });
               })();
             } else {
