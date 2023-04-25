@@ -15,16 +15,12 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "http://localhost:4200",
-      "http://localhost:8080",
-      "https://todo-front.fly.dev",
-      "*",
-    ],
+    origin: "https://todo-front.fly.dev",
     credentials: true,
+    optionsSuccessStatus: 200
   })
 );
+
 
 // public folder
 app.use(express.static(path.join(__dirname, "public")));

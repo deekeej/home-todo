@@ -9,8 +9,8 @@ export class TodoService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
     }),
+    responseType: 'text' as 'json',
     withCredentials: true,
   };
 

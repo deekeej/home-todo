@@ -6,7 +6,7 @@ kill_timeout = 5
 processes = []
 
 [env]
-
+ALLOWED_ORIGINS = "https://todo-back.fly.dev"
 [experimental]
   allowed_public_ports = []
   auto_rollback = true
