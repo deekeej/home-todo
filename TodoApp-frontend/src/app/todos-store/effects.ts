@@ -20,6 +20,7 @@ export class TodosEffects {
     this.actions$.pipe(
       ofType(actions.addTodoAction),
       mergeMap((todo) => {
+        console.log('ted to posila vole');
         return this.TodosService.addTodo(todo).pipe(
           map((todo) => actions.addTodoAction(todo))
         );

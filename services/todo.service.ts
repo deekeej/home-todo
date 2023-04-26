@@ -9,7 +9,7 @@ export const getTodos = async (req: Request, res: Response) => {
   console.log(req.body);
   try {
     con.query(
-      `SELECT id,id_user,title,completed FROM todos where id_user=?`,
+      `SELECT id,id_user,title,completed FROM todos where id_user= ?`,
       req.params.id,
       (err, rows) => {
         if (err) throw err;
@@ -33,6 +33,7 @@ export const addTodo = async (req: Request, res: Response) => {
   console.log(req.params.id);
   console.log("this is a body:");
   console.log(req.body);
+  console.log(req.body.length);
   try {
     con.query(
       `INSERT INTO todos (id_user,title,completed) VALUES (?,?,?)`,
@@ -41,7 +42,7 @@ export const addTodo = async (req: Request, res: Response) => {
         console.log("This is error from AddTodo:");
         if (err) throw err;
         console.log(err);
-        res.status(200);
+        res.json({ something: "something" });
       }
     );
     //con.end((err) => {
@@ -63,7 +64,7 @@ export const deleteTodo = async (req: Request, res: Response) => {
     console.log(req.body);
     con.query(`DELETE from todos where id=?`, req.params.id, (err) => {
       if (err) throw err;
-      res.status(200);
+      res.status(200).send({ message: "ima trying" });
     });
   } catch (error) {
     console.log(error);
@@ -82,7 +83,7 @@ export const updateTodo = async (req: Request, res: Response) => {
       [req.body.title, req.body.completed, req.params.id],
       (err) => {
         if (err) throw err;
-        res.status(200);
+        res.status(200).send({ message: "ima trying" });
       }
     );
   } catch (error) {
@@ -100,7 +101,7 @@ export const completeAllTodos = async (req: Request, res: Response) => {
     req.body.forEach((id: number) => {
       con.query(`UPDATE todos set completed=1 where id=?`, id, (err) => {
         if (err) throw err;
-        res.status(200);
+        res.status(200).send({ message: "ima trying" });
       });
     });
   } catch (error) {
@@ -121,7 +122,7 @@ export const deleteCompletedAllTodos = async (req: Request, res: Response) => {
       .forEach((id: number) => {
         con.query(`DELETE from todos where id=?`, id, (err) => {
           if (err) throw err;
-          res.status(200);
+          res.status(200).send({ message: "ima trying" });
         });
       });
   } catch (error) {

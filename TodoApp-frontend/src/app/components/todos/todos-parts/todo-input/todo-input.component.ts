@@ -41,17 +41,19 @@ export class TodoInputComponent implements OnInit {
   }
 
   addTodo() {
-    if (this.todoInput != '' || this.todoInput != null) {
+    if (this.todoInput !== undefined) {
+      console.log('this is todoInput:');
+      console.log(this.todoInput);
+      this.store.dispatch(
+        actions.addTodoAction({
+          id: this.idOfCurrentUser,
+          id_user: 0,
+          title: this.todoInput!,
+          completed: false,
+        })
+      );
+      this.store.dispatch(actions.getTodosAction({ id: this.idOfCurrentUser }));
+      this.todoInput = undefined;
     }
-    this.store.dispatch(
-      actions.addTodoAction({
-        id: this.idOfCurrentUser,
-        id_user: 0,
-        title: this.todoInput!,
-        completed: false,
-      })
-    );
-    this.store.dispatch(actions.getTodosAction({ id: this.idOfCurrentUser }));
-    this.todoInput = '';
   }
 }
