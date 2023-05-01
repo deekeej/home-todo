@@ -13,7 +13,7 @@ export const con = mysql.createConnection({
   host: "dbtodos.cimmks5yeesx.eu-central-1.rds.amazonaws.com",
   port: 3306,
   user: "admin",
-  password: "a1234567",
+  password: "abc123456789",
   database: "todoapp",
 });
 
