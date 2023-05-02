@@ -99,11 +99,12 @@ export const completeAllTodos = async (req: Request, res: Response) => {
   console.log(req.body);
   try {
     req.body.forEach((id: number) => {
+      console.log("THIS IS ID IN LOOP:" + id);
       con.query(`UPDATE todos set completed=1 where id=?`, id, (err) => {
         if (err) throw err;
-        res.status(200).send({ message: "ima trying" });
       });
     });
+    res.status(200).send({ message: "ima trying" });
   } catch (error) {
     console.log(error);
     res.status(400).send(error);
@@ -122,9 +123,9 @@ export const deleteCompletedAllTodos = async (req: Request, res: Response) => {
       .forEach((id: number) => {
         con.query(`DELETE from todos where id=?`, id, (err) => {
           if (err) throw err;
-          res.status(200).send({ message: "ima trying" });
         });
       });
+    res.status(200).send({ message: "ima trying" });
   } catch (error) {
     console.log(error);
     res.status(400).send(error);

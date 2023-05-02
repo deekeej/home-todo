@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, mergeMap } from 'rxjs';
+import { map, exhaustMap } from 'rxjs';
 import { TodoService } from '../services/todoService/Todo.service';
 import { actions } from './actions';
 
@@ -9,7 +9,7 @@ export class TodosEffects {
   getTodos$ = createEffect(() =>
     this.actions$.pipe(
       ofType(actions.getTodosAction),
-      mergeMap((user) => {
+      exhaustMap((user) => {
         return this.TodosService.getAllTodos(user.id).pipe(
           map((todos) => actions.getTodosSuccessAction({ todos }))
         );
@@ -19,8 +19,7 @@ export class TodosEffects {
   addTodo$ = createEffect(() =>
     this.actions$.pipe(
       ofType(actions.addTodoAction),
-      mergeMap((todo) => {
-        console.log('ted to posila vole');
+      exhaustMap((todo) => {
         return this.TodosService.addTodo(todo).pipe(
           map((todo) => actions.addTodoAction(todo))
         );
@@ -30,7 +29,7 @@ export class TodosEffects {
   deleteTodo$ = createEffect(() =>
     this.actions$.pipe(
       ofType(actions.deleteTodoAction),
-      mergeMap((todo) => {
+      exhaustMap((todo) => {
         return this.TodosService.deleteTodo(todo).pipe(
           map((todo) => actions.deleteTodoAction(todo))
         );
@@ -40,7 +39,7 @@ export class TodosEffects {
   updateTodo$ = createEffect(() =>
     this.actions$.pipe(
       ofType(actions.updateTodoAction),
-      mergeMap((todo) => {
+      exhaustMap((todo) => {
         return this.TodosService.updateTodo(todo).pipe(
           map((todo) => actions.updateTodoAction(todo))
         );
@@ -50,7 +49,7 @@ export class TodosEffects {
   completeAllTodos$ = createEffect(() =>
     this.actions$.pipe(
       ofType(actions.completeAllTodoAction),
-      mergeMap((action) => {
+      exhaustMap((action) => {
         return this.TodosService.completeAllTodos(action.Ids).pipe(
           map((id) => actions.completeAllTodoAction({ Ids: id }))
         );
@@ -60,7 +59,7 @@ export class TodosEffects {
   deleteAllCompletedTodos$ = createEffect(() =>
     this.actions$.pipe(
       ofType(actions.deleteAllCompletedTodoAction),
-      mergeMap((action) => {
+      exhaustMap((action) => {
         return this.TodosService.deleteAllCompletedTodos(action.Ids).pipe(
           map((id) => actions.deleteAllCompletedTodoAction({ Ids: id }))
         );
